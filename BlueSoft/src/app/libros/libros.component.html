@@ -1,0 +1,31 @@
+<h1>Libros</h1>
+
+<p *ngIf="!(libros$ | async)"><em>Loading...</em></p>
+<p>
+    <a [routerLink]="['Libro/add']" class="btn btn-primary float-right mb-3">Nuevo Libro</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(libros$ | async)?.length>0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Autor</th>
+            <th>Categoria</th>
+            <th>ISBN</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let libro of (libros$ | async)">
+            <td>{{ libro.idLibro }}</td>
+            <td><a [routerLink]="['/libro/', libro.idLibro]">{{ libro.nombre }}</a></td>
+            <td>{{ libro.autor.nombre }} {{ libro.autor.apellidos }} </td>
+            <td>{{ libro.categoria.nombre }}</td>
+            <td>{{ libro.ISBN }}</td>
+            <td><a [routerLink]="['/libro/edit/', libro.idLibro]" class="btn btn-primary btn-sm float-right">Editar</a></td>
+            <td><a [routerLink]="" (click)="delete(libro.idLibro)" class="btn btn-danger btn-sm float-right">Eliminar</a></td>
+        </tr>
+    </tbody>
+</table>

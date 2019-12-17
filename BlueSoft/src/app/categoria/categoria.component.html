@@ -1,0 +1,9 @@
+<ng-container *ngIf="(categoria$ | async) as categoria; else loading">
+
+    <h2><b>Id Categoria: </b> {{ categoria.idCategoria }}</h2>
+    <h2><b>Categoria: </b> {{ categoria.nombre }}</h2>
+    <h2><b>Descripcion: </b> {{ categoria.descripcion }}</h2>
+
+
+</ng-container>
+<ng-template #loading>Loading…</ng-template>

@@ -1,0 +1,29 @@
+<h1>Autores</h1>
+
+<p *ngIf="!(autores$ | async)"><em>Loading...</em></p>
+<p>
+    <a [routerLink]="['autor/add']" class="btn btn-primary float-right mb-3">Nuevo Autor</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(autores$ | async)?.length>0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Fecha Nacimiento</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let autor of (autores$ | async)">
+            <td>{{ autor.idAutor }}</td>
+            <td><a [routerLink]="['/autor/', autor.idAutor]">{{ autor.nombre }}</a></td>
+            <td>{{ autor.apellidos }}</td>
+            <td>{{ autor.fechanac }}</td>
+            <td><a [routerLink]="['/autor/edit/', autor.idAutor]" class="btn btn-primary btn-sm float-right">Editar</a></td>
+            <td><a [routerLink]="" (click)="delete(autor.idAutor)" class="btn btn-danger btn-sm float-right">Eliminar</a></td>
+        </tr>
+    </tbody>
+</table>

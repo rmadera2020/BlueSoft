@@ -1,0 +1,27 @@
+<h1>Categorias</h1>
+
+<p *ngIf="!(categorias$ | async)"><em>Loading...</em></p>
+<p>
+    <a [routerLink]="['categoria/add']" class="btn btn-primary float-right mb-3">Nueva Categoria</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(categorias$ | async)?.length>0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let categoria of (categorias$ | async)">
+            <td>{{ categoria.idCategoria }}</td>
+            <td><a [routerLink]="['/categoria/', categoria.idCategoria]">{{ categoria.nombre }}</a></td>
+            <td>{{ categoria.descripcion }}</td>
+            <td><a [routerLink]="['/categoria/edit/', categoria.idCategoria]" class="btn btn-primary btn-sm float-right">Editar</a></td>
+            <td><a [routerLink]="" (click)="delete(categoria.idCategoria)" class="btn btn-danger btn-sm float-right">Eliminar</a></td>
+        </tr>
+    </tbody>
+</table>
