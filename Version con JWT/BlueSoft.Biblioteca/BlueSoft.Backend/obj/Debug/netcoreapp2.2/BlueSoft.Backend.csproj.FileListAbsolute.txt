@@ -1,0 +1,16 @@
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.RazorAssemblyInfo.cache
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\appsettings.json
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\BlueSoft.Backend.deps.json
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\BlueSoft.Backend.runtimeconfig.json
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\BlueSoft.Backend.runtimeconfig.dev.json
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\BlueSoft.Backend.dll
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\BlueSoft.Backend.pdb
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.RazorAssemblyInfo.cs
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.AssemblyInfoInputs.cache
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.AssemblyInfo.cs
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.RazorTargetAssemblyInfo.cache
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.dll
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.pdb
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.csprojAssemblyReference.cache
