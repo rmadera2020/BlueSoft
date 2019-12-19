@@ -1,38 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using BlueSoft.Backend.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-
-namespace BlueSoft.Backend.Controllers
+﻿namespace BlueSoft.Backend.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using BlueSoft.Backend.Data;
+    using BlueSoft.Backend.Models;
+    using Microsoft.AspNetCore.Authorization;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Claims;
+    using System.Text;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Security.Cryptography;
+
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration configuration;
+        private readonly BibliotecaDbContext _context;
 
         // TRAEMOS EL OBJETO DE CONFIGURACIÓN (appsettings.json)
         // MEDIANTE INYECCIÓN DE DEPENDENCIAS.
-        public LoginController(IConfiguration configuration)
+        public LoginController(IConfiguration configuration, BibliotecaDbContext context)
         {
             this.configuration = configuration;
+            _context = context;
         }
-
+               
         // POST: api/Login
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(UsuarioLogin usuarioLogin)
         {
             var _userInfo = await AutenticarUsuarioAsync(usuarioLogin.Usuario, usuarioLogin.Password);
+
             if (_userInfo != null)
             {
                 return Ok(new { token = GenerarTokenJWT(_userInfo) });
@@ -44,30 +50,35 @@ namespace BlueSoft.Backend.Controllers
         }
 
         // COMPROBAMOS SI EL USUARIO EXISTE EN LA BASE DE DATOS 
-        private async Task<UsuarioInfo> AutenticarUsuarioAsync(string usuario, string password)
+        private async Task<Usuario> AutenticarUsuarioAsync(string usuario, string password)
         {
-            // AQUÍ LA LÓGICA DE AUTENTICACIÓN //
-
-            // Supondremos que el Usuario existe en la Base de Datos.
-            // Retornamos un objeto del tipo UsuarioInfo, con toda
-            // la información del usuario necesaria para el Token.
-            return new UsuarioInfo()
+            Usuario userReturn=null;
+            Usuario userDb = _context.Usuario.FirstOrDefault(a => a.Email == usuario);
+            if (userDb != null)
             {
-                // Id del Usuario en el Sistema de Información (BD)
-                Id = new Guid("B5D233F0-6EC2-4950-8CD7-F44D16EC878F"),
-                Nombre = "Nombre Usuario",
-                Apellidos = "Apellidos Usuario",
-                Email = "email.usuario@dominio.com",
-                Rol = "Administrador"
-            };
-
-            // Supondremos que el Usuario NO existe en la Base de Datos.
-            // Retornamos NULL.
-            //return null;
+                if (userDb.Password == SHA256Encripta(password))
+                {
+                    userReturn = userDb;
+                }
+            }
+            return userReturn;
         }
+        public string SHA256Encripta(string input)
+        {
+            SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
 
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            byte[] hashedBytes = provider.ComputeHash(inputBytes);
+
+            StringBuilder output = new StringBuilder();
+
+            for (int i = 0; i < hashedBytes.Length; i++)
+                output.Append(hashedBytes[i].ToString("x2").ToLower());
+
+            return output.ToString();
+        }
         // GENERAMOS EL TOKEN CON LA INFORMACIÓN DEL USUARIO
-        private string GenerarTokenJWT(UsuarioInfo usuarioInfo)
+        private string GenerarTokenJWT(Usuario usuarioInfo)
         {
             // CREAMOS EL HEADER //
             var _symmetricSecurityKey = new SymmetricSecurityKey(
@@ -81,11 +92,10 @@ namespace BlueSoft.Backend.Controllers
             // CREAMOS LOS CLAIMS //
             var _Claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.NameId, usuarioInfo.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.NameId, usuarioInfo.IdUsuario.ToString()),
                 new Claim("nombre", usuarioInfo.Nombre),
                 new Claim("apellidos", usuarioInfo.Apellidos),
-                new Claim(JwtRegisteredClaimNames.Email, usuarioInfo.Email),
-                new Claim(ClaimTypes.Role, usuarioInfo.Rol)
+                new Claim(JwtRegisteredClaimNames.Email, usuarioInfo.Email)                
             };
 
             // CREAMOS EL PAYLOAD //

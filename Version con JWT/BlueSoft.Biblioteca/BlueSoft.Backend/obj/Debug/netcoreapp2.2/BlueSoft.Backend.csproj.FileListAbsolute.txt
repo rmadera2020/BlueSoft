@@ -13,4 +13,5 @@ D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSof
 D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.RazorTargetAssemblyInfo.cache
 D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.dll
 D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.pdb
+D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\bin\Debug\netcoreapp2.2\log4net.config
 D:\Sistemas\BlueSoft.Biblioteca\BlueSoft.Backend\obj\Debug\netcoreapp2.2\BlueSoft.Backend.csprojAssemblyReference.cache

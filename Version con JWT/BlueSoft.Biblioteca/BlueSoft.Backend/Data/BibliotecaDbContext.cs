@@ -26,12 +26,10 @@ namespace BlueSoft.Backend.Data
                 new Categoria { Nombre = "Novela", Descripcion = "Novelas hechas televisión"},
                 new Categoria { Nombre = "Drama", Descripcion  = "Novelas Dramáticas" }                
                  );
-                 modelBuilder.Entity<Libro>().HasData(
-                 new Libro { Nombre = "El Coronel no tiene quien le escriba",  IdAutor=1, IdCategoria=1, ISBN="123"},
-                  new Libro { Nombre = "El General en su laberinto", IdAutor = 1, IdCategoria = 1, ISBN = "123" }
+            //Clave sha256 : B1u3s0ft2019
+            modelBuilder.Entity<Usuario>().HasData(
+                   new Usuario { Nombre="Roberto", Apellidos="Madera", Email="robertomadera@gmail.com", Password= "f2c8de2abd774eeaff6466a0f6a306982ab7c21432afe2979082469f773098ef" }
                  );
-
-
         }
 
         public DbSet<BlueSoft.Backend.Models.Autor> Autor { get; set; }
@@ -39,5 +37,7 @@ namespace BlueSoft.Backend.Data
         public DbSet<BlueSoft.Backend.Models.Categoria> Categoria { get; set; }
 
         public DbSet<BlueSoft.Backend.Models.Libro> Libro { get; set; }
+        public DbSet<BlueSoft.Backend.Models.Usuario> Usuario { get; set; }
+
     }
 }
